@@ -1,7 +1,13 @@
+
+
 /* Step 1: using axios, send a GET request to the following URL 
            (replacing the palceholder with your Github name):
            https://api.github.com/users/<your name>
 */
+
+
+
+
 
 /* Step 2: Inspect and study the data coming back, this is YOUR 
    github info! You will need to understand the structure of this 
@@ -24,11 +30,69 @@
           user, and adding that card to the DOM.
 */
 
-const followersArray = [];
+const followersArray = ["idongessien","ajkizer", "ajablanco","josiahroa18","teaguehannam","ardissam0","dakoriah"];
+
+followersArray.map(user => { axios("https://api.github.com/users/" + user).then(r => createCards(r.data)) })
 
 /* Step 3: Create a function that accepts a single object as its only argument,
           Using DOM methods and properties, create a component that will return the following DOM element:
+*/
 
+function createCards(follower) {
+  // Create elements
+  const card = document.createElement('div');
+  const img = document.createElement('img');
+  const cardInfo = document.createElement('div');
+  const name = document.createElement('h3');
+  const userName = document.createElement('p');
+  const locale = document.createElement('p');
+  const userLink = document.createElement('p');
+  const followers = document.createElement('p');
+  const following = document.createElement('p');
+  const userBio = document.createElement('p');
+
+  // Add classes
+  card.classList.add('card');
+  cardInfo.classList.add('card-info');
+  name.classList.add('name');
+  userName.classList.add('username');
+  name.classList.add('name');
+
+  var cards = document.querySelector('.cards');
+
+
+   // Append elements respectively
+   cards.appendChild(card);
+   card.appendChild(img);
+   card.appendChild(cardInfo);
+   cardInfo.appendChild(name);
+   cardInfo.appendChild(userName);
+   cardInfo.appendChild(locale);
+   cardInfo.appendChild(userLink);
+   cardInfo.appendChild(followers);
+   cardInfo.appendChild(following);
+   cardInfo.appendChild(userBio);
+
+  // Add content !
+  img.src = follower.avatar_url;
+  name.textContent = follower.name;
+  userName.textContent = follower.login;
+  locale.textContent = follower.location;
+  userLink.textContent = follower.url;
+  followers.textContent = follower.followers;
+  following.textContent = follower.following;
+  userBio.textContent = follower.bio;
+
+
+
+  return card;
+}
+
+
+
+
+
+/*
 <div class="card">
   <img src={image url of user} />
   <div class="card-info">
