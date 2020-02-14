@@ -5,7 +5,12 @@
            https://api.github.com/users/<your name>
 */
 
-
+axios({
+  url: 'https://api.github.com/users/idongessien',
+  method: 'get'
+}).then((response) => {
+  createCards(response.data);
+}).catch(err => console.error(err));
 
 
 
@@ -30,7 +35,7 @@
           user, and adding that card to the DOM.
 */
 
-const followersArray = ["idongessien","ajkizer", "ajablanco","josiahroa18","teaguehannam","ardissam0","dakoriah"];
+const followersArray = ["ajkizer", "ajablanco","josiahroa18","teaguehannam","ardissam0","dakoriah"];
 
 followersArray.map(user => { axios("https://api.github.com/users/" + user).then(r => createCards(r.data)) })
 
